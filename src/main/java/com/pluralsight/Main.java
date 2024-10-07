@@ -7,7 +7,50 @@ public class Main {
     public static void main(String[] args) {
         Library = GetInitializedLibrary();
 
-        DisplayBooks(Library);
+        char option = PromptMainChoices();
+
+        if(option =='A') {
+            //do available books display, offer to check one out.
+        } else if (option == 'C'){
+            //do checked out books display
+        }
+        else {
+            //this means X, exit...
+            //return;
+        }
+
+        //DisplayBooks(Library);
+
+    }
+
+    public static char PromptMainChoices(){
+        System.out.println("Welcome to the library! Please select from the following choices: ");
+        System.out.println("   Show [A]vailable Books");
+        System.out.println("   Show [C]hecked Out Books");
+        System.out.println("   E[X]it the Library");
+
+        do {
+            System.out.println("Command [A, C, X]");
+
+            String command = Console.promptForString();
+
+            if (command.equalsIgnoreCase("A")) {
+                return 'A';
+            }
+            if (command.equalsIgnoreCase("C")) {
+                return 'C';
+            }
+            if (command.equalsIgnoreCase("X")
+                    || command.equalsIgnoreCase("EXIT")
+                    || command.equalsIgnoreCase("Q")
+                    || command.equalsIgnoreCase("Quit")) {
+                return 'X';
+
+            }
+        }
+            while (true) ;
+
+
 
     }
 
