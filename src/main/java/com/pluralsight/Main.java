@@ -5,15 +5,23 @@ public class Main {
     public static Book[] Library;
 
     public static void main(String[] args) {
-        Library = getInitializedLibrary();
+        Library = GetInitializedLibrary();
 
-        for(Book book :Library){
-            System.out.println(book.getTitle());
-        }
+        DisplayBooks(Library);
 
     }
 
-    public static Book[] getInitializedLibrary() {
+    public static void DisplayBooks(Book[] books) {
+        System.out.printf("%4s %50s %20s %24s\n", "ID" ,"TITLE" ,"ISBN","CHECK OUT TO");
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
+        //System.out.println("   ID                                              TITLE                           ISBN");
+        for(Book book : books){
+            //System.out.println("  " + book.getId() + "  " + book.getTitle() + "  " + book.getISBN());
+            System.out.printf("%3s %55s %20s %24s\n", book.getId(), book.getTitle(), book.getISBN(), book.getCheckOutTo());
+        }
+    }
+
+    public static Book[] GetInitializedLibrary() {
         Book[] library = new Book[20];
             library[0] = new Book(1, "Practical Tableau", "ISBN11332211");
             library[1] = new Book(2, "Pro Git", "ISBN1133229918");
@@ -35,6 +43,7 @@ public class Main {
             library[17] = new Book(18, "The Mythical Man-Month", "ISBN9780201835953");
             library[18] = new Book(19, "Learning JavaScript Data Structures and Algorithms", "ISBN9781785880332");
             library[19] = new Book(20, "The Elements of Programming Interviews", "ISBN9781512218237");
+
 
             return library;
 
