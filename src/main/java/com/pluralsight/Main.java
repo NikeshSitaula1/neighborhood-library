@@ -30,7 +30,7 @@ public class Main {
         Book[] available = new Book[books.length];
         int nextIndex = 0;
         for(Book book : books) {
-            if(book.isCheckedOut()){
+            if(!book.isCheckedOut()){
                 available[nextIndex++] = book;
 
             }
@@ -56,8 +56,6 @@ public class Main {
     }
 
 
-
-
     public static char PromptMainChoices(){
         System.out.println("Welcome to the library! Please select from the following choices: ");
         System.out.println("   Show [A]vailable Books");
@@ -65,7 +63,7 @@ public class Main {
         System.out.println("   E[X]it the Library");
 
         do {
-            System.out.println("Command [A, C, X]");
+            System.out.print("Command [A, C, X]: ");
 
             String command = Console.promptForString();
 
