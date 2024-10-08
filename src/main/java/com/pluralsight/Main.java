@@ -5,23 +5,58 @@ public class Main {
     public static Book[] Library;
 
     public static void main(String[] args) {
+
         Library = GetInitializedLibrary();
 
-        char option = PromptMainChoices();
+        char option;
 
-        if(option =='A') {
-            //do available books display, offer to check one out.
-        } else if (option == 'C'){
-            //do checked out books display
-        }
-        else {
-            //this means X, exit...
-            //return;
-        }
+        do {
+            option = PromptMainChoices();
 
-        //DisplayBooks(Library);
-
+            if (option == 'A') {
+                Book[] availableBooks = GetAvailableBooks(Library);
+                DisplayBooks(availableBooks);
+                //do available books display, offer to check one out.
+            } else if (option == 'C') {
+                Book[] checkedOutBooks = GetCheckedOutBooks(Library);
+                DisplayBooks(checkedOutBooks);
+                //do checked out books display
+            }
+        } while (option != 'X');
     }
+
+
+    public static  Book[] GetAvailableBooks(Book[] books){
+        Book[] available = new Book[books.length];
+        int nextIndex = 0;
+        for(Book book : books) {
+            if(book.isCheckedOut()){
+                available[nextIndex++] = book;
+
+            }
+        }
+        Book[] results = new Book[nextIndex];
+        System.arraycopy(available,0 ,results,0,nextIndex);
+        return  results;
+    }
+
+    public static  Book[] GetCheckedOutBooks(Book[] books){
+        Book[] checkedOut = new Book[books.length];
+        int nextIndex = 0;
+        for(Book book : books) {
+            if(book.isCheckedOut()){
+                checkedOut[nextIndex++] = book;
+
+            }
+        }
+        Book[] results = new Book[nextIndex];
+        System.arraycopy(checkedOut,0 ,results,0,nextIndex);
+
+        return  results;
+    }
+
+
+
 
     public static char PromptMainChoices(){
         System.out.println("Welcome to the library! Please select from the following choices: ");
@@ -53,6 +88,7 @@ public class Main {
 
 
     }
+
 
     public static void DisplayBooks(Book[] books) {
         System.out.printf("%4s %50s %20s %24s\n", "ID" ,"TITLE" ,"ISBN","CHECK OUT TO");
@@ -86,10 +122,11 @@ public class Main {
             library[17] = new Book(18, "The Mythical Man-Month", "ISBN9780201835953");
             library[18] = new Book(19, "Learning JavaScript Data Structures and Algorithms", "ISBN9781785880332");
             library[19] = new Book(20, "The Elements of Programming Interviews", "ISBN9781512218237");
-
+            //todo delete later
+            library[3].checkOut("Matt");
+            library[7].checkOut("Very Long Named John");
 
             return library;
-
 
     }
 }

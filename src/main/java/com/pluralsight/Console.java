@@ -31,7 +31,7 @@ public class Console {
     }
     public static byte PromptForByte(String prompt){
         System.out.print(prompt);
-        byte userByte =scanner.nextByte();
-        return userByte;
+        byte userInput =scanner.nextByte();
+        return userInput;
     }
 }
