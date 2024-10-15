@@ -10,16 +10,19 @@ public class Main {
 
         char option;
 
+
         do {
             option = PromptMainChoices();
 
             if (option == 'A') {
                 Book[] availableBooks = GetAvailableBooks(Library);
                 DisplayBooks(availableBooks);
+                CheckingOut(availableBooks);
                 //do available books display, offer to check one out.
             } else if (option == 'C') {
                 Book[] checkedOutBooks = GetCheckedOutBooks(Library);
                 DisplayBooks(checkedOutBooks);
+                CheckingIn(checkedOutBooks);
                 //do checked out books display
             }
         } while (option != 'X');
@@ -78,14 +81,45 @@ public class Main {
                     || command.equalsIgnoreCase("Q")
                     || command.equalsIgnoreCase("Quit")) {
                 return 'X';
-
             }
         }
             while (true) ;
-
-
-
     }
+
+    public static void CheckingOut( Book[] books){
+        boolean checkThemOut = Console.promptForBoolean("Do you want to check out a book? ");
+
+        if(checkThemOut){
+            String customerName = Console.promptForString("Enter your name: ");
+            String bookTitle = Console.promptForString("Enter the title of the book: ");
+
+            for (Book book: books){
+                if (bookTitle.equalsIgnoreCase(book.getTitle())) {
+                    book.checkOut(customerName);
+                }
+            }
+        }
+    }
+
+    public static void CheckingIn(Book[] books){
+        boolean checkThemIn = Console.promptForBoolean("Do you want to check in a book? ");
+
+        if(checkThemIn){
+            String checkInID = Console.promptForString("Enter your ID: ");
+            int checkID = Integer.parseInt(checkInID);
+
+            for(Book book : books){
+                if(checkID == book.getId()){
+                    book.checkIn();
+                    System.out.println("Check In successful");
+                    break;
+
+                }
+            }
+
+        }
+    }
+
 
 
     public static void DisplayBooks(Book[] books) {
@@ -120,9 +154,6 @@ public class Main {
             library[17] = new Book(18, "The Mythical Man-Month", "ISBN9780201835953");
             library[18] = new Book(19, "Learning JavaScript Data Structures and Algorithms", "ISBN9781785880332");
             library[19] = new Book(20, "The Elements of Programming Interviews", "ISBN9781512218237");
-            //todo delete later
-            library[3].checkOut("Matt");
-            library[7].checkOut("Very Long Named John");
 
             return library;
 

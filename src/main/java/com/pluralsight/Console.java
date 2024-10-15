@@ -29,9 +29,10 @@ public class Console {
         scanner.nextLine();
         return value;
     }
+
     public static byte PromptForByte(String prompt){
         System.out.print(prompt);
-        byte userInput =scanner.nextByte();
-        return userInput;
+        byte userByte =scanner.nextByte();
+        return userByte;
     }
 }
